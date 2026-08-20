@@ -1,0 +1,7 @@
+# dsh-vditor-composer bundle patch: 将插件行插入 profile 组合。
+# Host 半边（lib/index.js）通过 webServer 注册 /plugins/vditor-composer 前缀路由，
+# 提供附件落盘、系统文件选择器与工作区文件搜索；浏览器半边（lib/client.js）
+# 由 package.json 的 dsh.client 声明随 bundle 加载。
+- insert:
+    - id: vditor-composer
+      name: 'dsh-vditor-composer'
