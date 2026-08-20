@@ -1,6 +1,7 @@
-# dsh-vditor-composer
+# dsh-vditor
 
-> GitHub 仓库 `dsh-vditor` —— 用 Vditor 接管 DSH Web 聊天输入的插件
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Vditor 3.11.3](https://img.shields.io/badge/Vditor-3.11.3-5c8f3e.svg)](https://github.com/Vanessa219/vditor)
 
 用 **Vditor 3.11.3（IR 即时渲染模式）** 接管 DSH Web 的聊天输入卡片，并把用户消息渲染为完整 Markdown。
 
@@ -32,7 +33,15 @@
 - **Client（lib/client.js）**：`window.__ModuleLoader__.load` 模块，注入 `timer`/`slots`
 - Vditor 从 `https://unpkg.com/vditor@3.11.3` 动态加载（需联网）
 
-## 安装（Profile 挂载）
+## 安装
+
+### 通过 `dsh plugin` 命令（推荐）
+
+```bash
+dsh plugin --profile web add github:zhy201810576/dsh-vditor
+```
+
+### 手动挂载（Profile）
 
 在 profile 目录（如 `~/.dsh/profiles/web`）：
 
@@ -50,4 +59,4 @@ pnpm add "file:path/to/dsh-vditor-composer"
 
 ## License
 
-[MIT](./LICENSE)
+本项目遵循 [MIT License](./LICENSE)。
