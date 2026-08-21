@@ -3,35 +3,44 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Vditor 3.11.3](https://img.shields.io/badge/Vditor-3.11.3-5c8f3e.svg)](https://github.com/Vanessa219/vditor)
 
-用 **Vditor 3.11.3（IR 即时渲染模式）** 接管 DSH Web 的聊天输入卡片，并把用户消息渲染为完整 Markdown。
+让 DSH 的聊天输入更顺手——用 Vditor 即时渲染输入框，把你想说的写得漂亮、看得清楚。
 
-## 功能
+## 预览
 
-### 输入卡片（替换 `conversation.composer.bar` 槽，保留 hero 其余界面）
+**欢迎页**
 
-- Vditor IR 编辑器：Markdown 即时渲染、代码块高亮（monokai）、KaTeX 数学公式、Mermaid 图表
-- 斜杠命令菜单：`/goal` `/compact` `/permission` `/plan` `/export` `/feedback` `/model`（实时过滤）
-- `@` 文件引用菜单：工作区文件递归搜索（深度 ≤5，最多 30 条，跳过 node_modules/.git/.dsh-*）
-- 附件胶囊：通过系统文件选择器（Host PowerShell OpenFileDialog）选取文件，**仅引用路径**（不拷贝、不插入 `@`），发送时路径附入消息文本
-- 粘贴剪贴板图片：自动落盘到工作区 `.dsh-assets/` 并生成路径胶囊
-- 复刻原版工具栏：模型选择（含推理等级）、权限菜单、命令目录、上下文用量环（含明细）、任务栏、统计行、DeepSeek 余额行
-- 动态 placeholder：hero 新建会话「描述你想要构建的内容」、计划模式、会话不可用、database-helper 三态、默认「给智能体发消息」
-- 代码块语言徽标：hover 时右下角显示（深色底白字，伪元素实现，不破坏 Vditor IR 的编辑 DOM）
+![欢迎页](./.pic/欢迎页.png)
 
-### 用户消息气泡（替换 `conversation.chat.node` 的 `user`/`steering` key）
+**基础功能演示**：代码块高亮、KaTeX 数学公式、Mermaid 图表
 
-- `Vditor.preview` 渲染：代码块高亮 + 语言徽标 + 复制按钮（hover 显示）、KaTeX、Mermaid
-- 仿 dsh-better-markdown 的安全策略：链接白名单（http/https/mailto，`target=_blank`）、图片仅外链
-- 主题自适应：`--dsw-alias-bg-base` 亮度检测 + 主题切换监听
+![基础功能演示](./.pic/基础功能演示.png)
 
-## 架构
+**附件路径胶囊**
 
-- **Host（lib/index.js）**：`/plugins/vditor-composer` 前缀路由（webServer）
-  - `POST /save-upload`：base64 → 工作区 `.dsh-assets`（PowerShell stdin 写入）
-  - `POST /pick-files`：系统文件选择器，返回绝对路径列表
-  - `GET /atfile-search`：工作区文件递归搜索
-- **Client（lib/client.js）**：`window.__ModuleLoader__.load` 模块，注入 `timer`/`slots`
-- Vditor 从 `https://unpkg.com/vditor@3.11.3` 动态加载（需联网）
+![文件胶囊](./.pic/文件胶囊.png)
+
+## 体验亮点
+
+### 边写边渲染的输入框
+
+- **Markdown 所见即所得**：代码块高亮、KaTeX 数学公式、Mermaid 图表即时渲染
+- **斜杠命令**：输入 `/` 快速唤起 `/goal` `/compact` `/permission` `/plan` `/export` `/feedback` `/model`，实时过滤
+- **`@` 引用文件**：输入 `@` 在工作区文件里实时搜索、一键插入，Windows 路径正确渲染
+
+### 附件与图片
+
+- **附件路径胶囊**：选择文件后以胶囊形式展示，中文文件名与 Windows 反斜杠路径均正确显示（乱码与转义问题已修复），发送时路径自动附入消息
+- **粘贴图片自动保存**：剪贴板图片直接落盘到工作区，生成路径胶囊
+
+### 更完整的消息展示
+
+- **完整 Markdown 渲染**：用户消息里的代码块带高亮、语言徽标和复制按钮，公式、图表正常显示
+- **主题自适应**：跟随亮色 / 暗色主题自动切换
+
+### 保留原版体验
+
+- 模型选择、权限菜单、命令目录、上下文用量环、任务栏、统计行、余额行一应俱全
+- 动态 placeholder：根据会话状态智能切换提示文案
 
 ## 安装
 
@@ -41,7 +50,7 @@
 dsh plugin --profile web add github:zhy201810576/dsh-vditor
 ```
 
-### 手动挂载（Profile）
+### 手动挂载
 
 在 profile 目录（如 `~/.dsh/profiles/web`）：
 
@@ -51,11 +60,12 @@ pnpm add "file:path/to/dsh-vditor-composer"
 
 然后在 profile 的 `package.json` 的 `dsh.profile.bundles` 数组中加入 `"dsh-vditor-composer"`，重启 DSH 生效。
 
+> **注意**：Vditor 从 `https://unpkg.com/vditor@3.11.3` 动态加载，运行时需要联网。
+
 ## 说明
 
-- 原版输入框由 `conversation.composer.bar` 槽（priority 0）提供，本插件以 priority -10 注册仅替换输入卡片。
-- 附件只是路径引用：模型需要自行读取文件内容。
-- 若同时启用本插件的动态（会话内）版本，会与正式版重复注册同一槽位，请停用其中一个。
+- 附件只引用路径、不拷贝文件内容，模型会自行读取文件。
+- 若同时启用本插件的动态（会话内）版本，会与正式版重复注册，请停用其中一个。
 
 ## License
 
