@@ -10,15 +10,15 @@
 
 **欢迎页**
 
-![欢迎页](./.pic/欢迎页.png)
+![欢迎页](https://raw.githubusercontent.com/zhy201810576/dsh-vditor/main/.pic/%E6%AC%A2%E8%BF%8E%E9%A1%B5.png)
 
 **基础功能演示**：代码块高亮、KaTeX 数学公式、Mermaid 图表
 
-![基础功能演示](./.pic/基础功能演示.png)
+![基础功能演示](https://raw.githubusercontent.com/zhy201810576/dsh-vditor/main/.pic/%E5%9F%BA%E7%A1%80%E5%8A%9F%E8%83%BD%E6%BC%94%E7%A4%BA.png)
 
 **附件路径胶囊**
 
-![文件胶囊](./.pic/文件胶囊.png)
+![文件胶囊](https://raw.githubusercontent.com/zhy201810576/dsh-vditor/main/.pic/%E6%96%87%E4%BB%B6%E8%83%B6%E5%9B%8A.png)
 
 ## 体验亮点
 
