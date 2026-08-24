@@ -55,10 +55,10 @@ dsh plugin --profile web add github:zhy201810576/dsh-vditor
 在 profile 目录（如 `~/.dsh/profiles/web`）：
 
 ```sh
-pnpm add "file:path/to/dsh-vditor-composer"
+pnpm add "file:path/to/dsh-vditor"
 ```
 
-然后在 profile 的 `package.json` 的 `dsh.profile.bundles` 数组中加入 `"dsh-vditor-composer"`，重启 DSH 生效。
+然后在 profile 的 `package.json` 的 `dsh.profile.bundles` 数组中加入 `"dsh-vditor"`，重启 DSH 生效。
 
 > **注意**：Vditor 从 `https://unpkg.com/vditor@3.11.3` 动态加载，运行时需要联网。
 
