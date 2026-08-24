@@ -1,5 +1,6 @@
 # dsh-vditor
 
+[![npm version](https://img.shields.io/npm/v/dsh-vditor)](https://www.npmjs.com/package/dsh-vditor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Vditor 3.11.3](https://img.shields.io/badge/Vditor-3.11.3-5c8f3e.svg)](https://github.com/Vanessa219/vditor)
 
@@ -50,7 +51,17 @@
 dsh plugin --profile web add github:zhy201810576/dsh-vditor
 ```
 
-### 手动挂载
+### 通过 npm 安装
+
+在 profile 目录（如 `~/.dsh/profiles/web`）：
+
+```sh
+pnpm add dsh-vditor
+```
+
+然后在 profile 的 `package.json` 的 `dsh.profile.bundles` 数组中加入 `"dsh-vditor"`，重启 DSH 生效。
+
+### 从本地源码挂载
 
 在 profile 目录（如 `~/.dsh/profiles/web`）：
 
